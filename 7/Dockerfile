@@ -10,7 +10,7 @@ ENV SHELL=/bin/bash \
   HOSTNAME=${HOSTNAME:-casjaysdev-$IMAGE_NAME} \
   TZ=$TIMEZONE
 
-RUN yum clean all && rm -Rf /etc/yum.repos.d/* //etc/yum.conf
+RUN yum clean all && /etc/yum.conf
 
 COPY ./etc/. /etc/.
 COPY ./bin/. /usr/local/bin/

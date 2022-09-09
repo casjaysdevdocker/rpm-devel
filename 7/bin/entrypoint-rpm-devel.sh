@@ -94,7 +94,15 @@ fi
 [ -f "/etc/.env.sh" ] && rm -Rf "/etc/.env.sh"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Additional commands
-
+if [ "$(uname -m)" = "x86_64" ] && [ -f "/etc/yum.repos.d/casjay.disabled" ]; then
+  mv -f "/etc/yum.repos.d/casjay.disabled" "/etc/yum.repos.d/casjay.repo"
+fi
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+if [ -d "/config/yum.repos" ]; then
+  cp -R "/config/yum.repos/." "/etc/yum.repos.d/"
+fi
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+yum update -y
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 case "$1" in
 --help) # Help message
