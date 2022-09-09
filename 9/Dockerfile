@@ -11,6 +11,7 @@ ENV SHELL=/bin/bash \
   TZ=$TIMEZONE
 
 RUN rm -Rf /usr/local/bin/.gitkeep /config /data && \
+  yum reinstall -y tzdata; \
   yum update -y && \
   yum install -y epel-release; \
   yum install -y systemd curl git wget rpmbuild && \
