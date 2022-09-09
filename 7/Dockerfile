@@ -10,6 +10,12 @@ ENV SHELL=/bin/bash \
   HOSTNAME=${HOSTNAME:-casjaysdev-$IMAGE_NAME} \
   TZ=$TIMEZONE
 
+RUN yum clean all && rm -Rf /etc/yum.repos.d/* && yum makecache
+
+COPY ./etc/. /etc/.
+COPY ./bin/. /usr/local/bin/
+COPY /etc/skel/. /root/
+
 RUN rm -Rf /usr/local/bin/.gitkeep /config /data && \
   yum reinstall -y tzdata; \
   yum update -y && \
@@ -17,10 +23,6 @@ RUN rm -Rf /usr/local/bin/.gitkeep /config /data && \
   yum install -y systemd curl git wget rpmbuild && \
   yum groupinstall "Development tools" && \
   yum clean all
-
-COPY ./etc/. /etc/.
-COPY ./bin/. /usr/local/bin/
-COPY /etc/skel/. /root/
 
 FROM scratch
 ARG BUILD_DATE="$(date +'%Y-%m-%d %H:%M')"
