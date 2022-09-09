@@ -95,6 +95,7 @@ fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # Additional commands
 if [ "$(uname -m)" = "x86_64" ] && [ -f "/etc/yum.repos.d/casjay.disabled" ]; then
+  rm -R /etc/yum.repos.d/*.repo
   mv -f "/etc/yum.repos.d/casjay.disabled" "/etc/yum.repos.d/casjay.repo"
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
