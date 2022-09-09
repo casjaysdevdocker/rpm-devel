@@ -17,11 +17,10 @@ COPY ./bin/. /usr/local/bin/
 COPY /etc/skel/. /root/
 
 RUN rm -Rf /usr/local/bin/.gitkeep /config /data && \
-  yum makecache && \
   yum reinstall -y tzdata; \
   yum update -y && \
   yum install -y systemd curl git wget rpmbuild && \
-  yum groupinstall "Development tools" && \
+  yum groupinstall -y "Development tools" && \
   yum clean all
 
 FROM scratch
