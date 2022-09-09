@@ -33,7 +33,8 @@ cmd_exists buildx || echo "This script requires buildx"
 BASE_DIR="$(dirname "$(realpath "$0")")"
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 for d in 7 8 9; do
-  [ -f "$BASE_DIR/$d/Dockerfile" ] && cd "$BASE_DIR/$d" && buildx . rpm-devel $d
+  echo "Entering into $BASE_DIR/$d"
+  [ -f "$BASE_DIR/$d/Dockerfile" ] && buildx "$BASE_DIR/$d" rpm-devel $d
 done
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # End application
