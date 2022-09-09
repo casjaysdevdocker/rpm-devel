@@ -15,7 +15,7 @@ RUN rm -Rf /usr/local/bin/.gitkeep /config /data && \
   yum update -y && \
   yum install -y epel-release; \
   yum install -y systemd curl git wget rpmbuild && \
-  yum groupinstall "Development tools" && \
+  yum groupinstall -y "Development tools" && \
   yum clean all
 
 COPY ./etc/. /etc/.
