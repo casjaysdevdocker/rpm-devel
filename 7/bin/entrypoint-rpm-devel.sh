@@ -9,11 +9,11 @@
 # @@Copyright        :  Copyright: (c) 2022 Jason Hempstead, Casjays Developments
 # @@Created          :  Friday, Sep 09, 2022 15:13 EDT
 # @@File             :  entrypoint-rpm-devel.sh
-# @@Description      :  
+# @@Description      :
 # @@Changelog        :  New script
 # @@TODO             :  Better documentation
-# @@Other            :  
-# @@Resource         :  
+# @@Other            :
+# @@Resource         :
 # @@Terminal App     :  no
 # @@sudo/root        :  no
 # @@Template         :  other/docker-entrypoint
@@ -117,11 +117,24 @@ healthcheck) # Docker healthcheck
   exitCode=$?
   ;;
 
+build)
+  shift 1
+  if [ -d "$HOME/Documents/sources" ]; then
+    for d in "$HOME/Documents/sources"/*; do
+      dir_name="$(basename "$d")"
+      spec_file="$(ls -A "$HOME/rpmbuild/$dirname"/*.spec | head -n1)"
+      ln -sf "$d" "$HOME/rpmbuild/$dirname"
+      [ -f "$HOME/rpmbuild/$dirname/$spec_file" ] && yum-builddep "$HOME/rpmbuild/$dirname/$spec_file"
+      rpmbuild -ba "$HOME/rpmbuild/$dirname/$spec_file"
+    done
+  fi
+  ;;
+
 *) # Execute primary command
   if [ $# -eq 0 ]; then
     __exec_bash "/bin/bash"
   else
-    __exec_bash "/bin/bash"
+    __exec_bash "$@"
   fi
   exitCode=$?
   ;;
