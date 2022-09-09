@@ -12,7 +12,9 @@ ENV SHELL=/bin/bash \
 
 RUN rm -Rf /usr/local/bin/.gitkeep /config /data && \
   yum update -y && \
-  yum install -y systemd curl git wget rpmbuild
+  yum install -y epel-release; \
+  yum install -y systemd curl git wget rpmbuild && \
+  yum clean all
 
 COPY ./etc/. /etc/.
 COPY ./bin/. /usr/local/bin/
