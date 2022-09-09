@@ -10,16 +10,16 @@ ENV SHELL=/bin/bash \
   HOSTNAME=${HOSTNAME:-casjaysdev-$IMAGE_NAME} \
   TZ=$TIMEZONE
 
-RUN yum clean all && rm -Rf /etc/yum.repos.d/* && yum makecache
+RUN yum clean all && rm -Rf /etc/yum.repos.d/* 
 
 COPY ./etc/. /etc/.
 COPY ./bin/. /usr/local/bin/
 COPY /etc/skel/. /root/
 
 RUN rm -Rf /usr/local/bin/.gitkeep /config /data && \
+  yum makecache && \
   yum reinstall -y tzdata; \
   yum update -y && \
-  yum install -y epel-release; \
   yum install -y systemd curl git wget rpmbuild && \
   yum groupinstall "Development tools" && \
   yum clean all
