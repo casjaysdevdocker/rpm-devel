@@ -12,7 +12,7 @@ ENV SHELL=/bin/bash \
 
 RUN rm -Rf /usr/local/bin/.gitkeep /config /data && \
   yum update -y && \
-  yum install -y systemd curl git wget
+  yum install -y systemd curl git wget rpmbuild
 
 COPY ./etc/. /etc/.
 COPY ./bin/. /usr/local/bin/
