@@ -11,11 +11,11 @@ ENV SHELL=/bin/bash \
   TZ=$TIMEZONE
 
 RUN rm -Rf /usr/local/bin/.gitkeep /config /data && \
-  yum --setopt=skip_if_unavailable=TRUE reinstall -y tzdata; \
-  yum --setopt=skip_if_unavailable=TRUE update -y && \
-  yum --setopt=skip_if_unavailable=TRUE install -y epel-release; \
-  yum --setopt=skip_if_unavailable=TRUE install -y systemd curl git wget rpmbuild && \
-  yum --setopt=skip_if_unavailable=TRUE groupinstall -y "Development tools" && \
+  yum reinstall -y tzdata; \
+  yum update -y && \
+  yum install -y epel-release; \
+  yum install -y systemd curl git wget rpmbuild && \
+  yum groupinstall -y "Development tools" && \
   yum clean all
 
 COPY ./etc/. /etc/.

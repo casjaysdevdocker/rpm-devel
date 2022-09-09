@@ -17,10 +17,10 @@ COPY ./bin/. /usr/local/bin/
 COPY /etc/skel/. /root/
 
 RUN rm -Rf /usr/local/bin/.gitkeep /config /data && \
-  yum --setopt=skip_if_unavailable=TRUE reinstall -y tzdata; \
-  yum --setopt=skip_if_unavailable=TRUE update -y && \
-  yum --setopt=skip_if_unavailable=TRUE install -y systemd curl git wget rpmbuild && \
-  yum --setopt=skip_if_unavailable=TRUE groupinstall -y "Development tools" && \
+  yum reinstall --setopt=skip_if_unavailable=TRUE -y tzdata; \
+  yum update --setopt=skip_if_unavailable=TRUE -y && \
+  yum install --setopt=skip_if_unavailable=TRUE -y systemd curl git wget rpmbuild && \
+  yum groupinstall --setopt=skip_if_unavailable=TRUE -y "Development tools" && \
   yum clean all
 
 FROM scratch
