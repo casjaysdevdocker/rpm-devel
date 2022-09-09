@@ -1,27 +1,32 @@
 global debug_package  %{nil}
 
 %osver                el7
-%BuildArch            %{_target_cpu}
+%pkgver               2.casjay
+
 %packager             CasjaysDev
-%vendor               CasjaysDev http://rpms.casjaysdev.com
+%vendor               %packager http://rpms.casjaysdev.com
+
+%_gpg_path            %(echo "$HOME")/.gnupg
 %_gpg_name            Jason Hempstead
+
+%BuildArch            %{_target_cpu}
 
 %_topdir              %{getenv:HOME}/rpmbuild
 %_sourcedir           %{getenv:HOME}/rpmbuild/%{name}
 %_specdir             %{getenv:HOME}/rpmbuild/%{name}
 
-%_rpmdir              %{getenv:HOME}/Documents/rpmbuild/x86_64/%osver/rpms
-%_srcrpmdir           %{getenv:HOME}/Documents/rpmbuild/x86_64/%osver/srpm
-%_debugrpmdir         %{getenv:HOME}/Documents/rpmbuild/x86_64/%osver/debug
 %_builddir            /var/tmp/BUILD
 %_buildrootdir        /var/tmp/BUILDROOT
-%_buildroot           /var/tmp/BUILDROOT/%{name}-%{version}-%{release}.%{_arch}
 
-%_gpg_path            %(echo $HOME)/.gnupg
+%_rpmdir              %{_topdir}/packages/%{BuildArch}/%{osver}/rpms
+%_srcrpmdir           %{_topdir}/packages/%{BuildArch}/%{osver}/srpm
+%_debugrpmdir         %{_topdir}/packages/%{BuildArch}/%{osver}/debug
+%_buildroot           %{_buildrootdir}/%{name}-%{version}-%{release}.%{_arch}
+
 %_signature           gpg
 %_gpgbin              /usr/bin/gpg
-%distribution         2.casjay.%osver
-%dist                 2.casjay.%osver
+%distribution         %pkgver.%osver
+%dist                 %pkgver.%osver
 %_var                 /var
 %_tmppath             /tmp
 %_usr                 /usr
