@@ -14,7 +14,7 @@ RUN rm -Rf /usr/local/bin/.gitkeep /config /data && \
   yum reinstall -y tzdata; \
   yum update -y && \
   yum install -y epel-release; \
-  yum install -y systemd curl git wget rpmbuild && \
+  yum install -y --skip-broken systemd curl git wget rpmbuild && \
   yum groupinstall -y "Development tools" && \
   yum clean all
 
