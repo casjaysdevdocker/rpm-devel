@@ -10,7 +10,6 @@ global debug_package  %{nil}
 %_gpg_name            Jason Hempstead
 
 %BuildArch            %{_target_cpu}
-
 %_topdir              %{getenv:HOME}/rpmbuild
 %_sourcedir           %{getenv:HOME}/rpmbuild/%{name}
 %_specdir             %{getenv:HOME}/rpmbuild/%{name}
@@ -18,9 +17,12 @@ global debug_package  %{nil}
 %_builddir            /var/tmp/BUILD
 %_buildrootdir        /var/tmp/BUILDROOT
 
-%_rpmdir              %{_topdir}/packages/%{BuildArch}/%{osver}/rpms
-%_srcrpmdir           %{_topdir}/packages/%{BuildArch}/%{osver}/srpm
-%_debugrpmdir         %{_topdir}/packages/%{BuildArch}/%{osver}/debug
+%_targetdir           %{getenv:HOME}/Documents/rpmbuild/%{BuildArch}/%{osver}
+
+%_rpmdir              %{_targetdir/rpms
+%_srcrpmdir           %{_targetdir/srpm
+%_debugrpmdir         %{_targetdir/debug
+
 %_buildroot           %{_buildrootdir}/%{name}-%{version}-%{release}.%{_arch}
 
 %_signature           gpg

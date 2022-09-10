@@ -103,6 +103,8 @@ if [ -d "/config/yum.repos" ]; then
   cp -R "/config/yum.repos/." "/etc/yum.repos.d/"
 fi
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+[ -d "$HOME/rpmbuild" ] || mkdir -p "$HOME/rpmbuild"
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 yum update -y
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 case "$1" in
